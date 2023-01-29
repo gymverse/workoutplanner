@@ -9,7 +9,7 @@ node_modules
 coverage
 
 # production - upload this to have it update directly in github pages
-# /build
+build
 
 example.md
 

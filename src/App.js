@@ -4,7 +4,7 @@ import './App.css';
 const MealGroup = ({ title, items, onAddItem }) => {
     return (
         <div className='meal-group'>
-            <h3>{title}</h3>
+            <h3>group: {title}</h3>
             {items.map((item, index) => (
                 <MealItem key={index} name={item} />
             ))}

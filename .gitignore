@@ -1,12 +1,12 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-src/node_modules
-src/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # testing
-src/coverage
+coverage
 
 # production - upload this to have it update directly in github pages
 # /build

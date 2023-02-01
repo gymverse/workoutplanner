@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
 import './App.css';
 
-const MealGroup = ({ title, items, onAddItem }) => {
+const MealGroup = ({ title, items, onAddItem, onDeleteItem }) => {
     return (
         <div className='meal-group'>
             <h3>meal group: {title}</h3>
-            {items.map((item, index) => (
-                <MealItem key={index} name={item} />
+            {items.map((item, itemIndex) => (
+                <MealItem key={itemIndex} name={item} onDelete={(itemIndex) => onDeleteItem(itemIndex)} index={itemIndex} />
             ))}
             <AddMealItem onAdd={(newItem) => onAddItem(newItem)} />
         </div>
     );
 };
 
-const MealItem = ({ name }) => {
+const MealItem = ({ name, onDelete, index }) => {
     return (
         <div className='meal-item'>
             <span>{name}</span>
+            <button onClick={() => onDelete(index)}>Delete</button>
         </div>
     );
 };
@@ -58,10 +59,17 @@ const App = () => {
         newMealGroups[groupIndex].items.push(name);
         setMealGroups(newMealGroups);
     };
+    const deleteMealItem = (groupIndex, itemIndex) => {
+        const newMealGroups = [...mealGroups];
+        newMealGroups[groupIndex].items.splice(itemIndex, 1);
+        setMealGroups(newMealGroups);
+    };
     return (
         <div>
-            {mealGroups.map((group, index) => (
-                <MealGroup key={index} {...group} onAddItem={(name) => addMealItem(index, name)} />
+            {mealGroups.map((group, groupIndex) => (
+                <MealGroup key={groupIndex} {...group}
+                    onAddItem={(name) => addMealItem(groupIndex, name)}
+                    onDeleteItem={(itemIndex) => deleteMealItem(groupIndex, itemIndex)} />
             ))}
             <AddMealGroup onAdd={addMealGroup} />
         </div>
